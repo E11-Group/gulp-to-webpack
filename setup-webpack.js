@@ -21,7 +21,7 @@ async function setupWebpack() {
   if (themeDirs.length === 1) {
     chosenTheme = themeDirs[0];
   } else {
-    const { themeChoice } = await inquirer.select({
+    const themeChoice = await inquirer.select({
       message: 'Multiple themes found. Please select one to set up Webpack:',
       choices: themeDirs,
     });
