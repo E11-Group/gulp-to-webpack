@@ -43,7 +43,12 @@ module.exports = {
         test: /\.scss$/, // Process SCSS files
         use: [
           MiniCssExtractPlugin.loader, // Extract CSS into separate files
-          'css-loader', // Translates CSS into CommonJS
+          {
+            loader: 'css-loader',
+            options: { 
+              url: false, // This disables URL resolution by css-loader
+            },
+          },
           {
             loader: 'postcss-loader', // Processes CSS with PostCSS plugins like autoprefixer
             options: {
