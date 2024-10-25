@@ -50,7 +50,7 @@ ensurePackageJson();
 if (!fs.existsSync("node_modules")) {
   console.log("Installing necessary packages...");
   execSync(
-    "npm install @inquirer/inquirer autoprefixer css-loader glob mini-css-extract-plugin postcss-loader sass sass-loader terser webpack webpack-cli webpack-concat-files-plugin prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-plugin-node eslint-plugin-promise",
+    "npm install @inquirer/prompts autoprefixer css-loader glob mini-css-extract-plugin postcss-loader sass sass-loader terser webpack webpack-cli webpack-concat-files-plugin prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-plugin-node eslint-plugin-promise",
     { stdio: "inherit" }
   );
   console.log("✔ Dependencies installed successfully.");
