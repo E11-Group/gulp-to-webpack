@@ -54,6 +54,9 @@ if (!fs.existsSync('node_modules')) {
   console.log('✔ Dependencies installed successfully.');
 }
 
-// Run the main setup script
+// Run setup-webpack.js directly from GitHub
 console.log('Running setup-webpack.js...');
-execSync('node setup-webpack.js', { stdio: 'inherit' });
+execSync(
+  'curl -s https://raw.githubusercontent.com/E11-Group/gulp-to-webpack/main/setup-webpack.js | node',
+  { stdio: 'inherit' }
+);
