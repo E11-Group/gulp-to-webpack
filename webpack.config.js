@@ -77,9 +77,9 @@ module.exports = {
                   "css/global/mixins.scss"
                 )}';
               `, // Inject global SCSS variables and mixins into every file
-            },
-            sassOptions: {
-              hoistUseStatements: true,
+              sassOptions: {
+                hoistUseStatements: true,
+              },
             },
           },
         ],
