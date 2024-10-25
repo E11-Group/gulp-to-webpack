@@ -23,7 +23,7 @@ async function setupWebpack() {
   } else {
     const { themeChoice } = await inquirer.select({
       message: 'Multiple themes found. Please select one to set up Webpack:',
-      choices: themeDirs.map((theme) => ({ name: theme })),
+      choices: themeDirs,
     });
     chosenTheme = themeChoice;
   }
@@ -32,14 +32,14 @@ async function setupWebpack() {
   const webpackTemplatePath = path.resolve(__dirname, 'webpack.config.js');
   const webpackConfigContent = fs
     .readFileSync(webpackTemplatePath, 'utf-8')
-    .replace('<chosen-theme>', chosenTheme);
+    .replace('<theme-name>', chosenTheme);
   
-  fs.writeFileSync(path.join(themesDir, chosenTheme, 'webpack.config.js'), webpackConfigContent);
-  console.log(`✔ Webpack config copied to ${themesDir}/${chosenTheme}/webpack.config.js`);
+  fs.writeFileSync(path.resolve(process.cwd(), 'webpack.config.js'), webpackConfigContent);
+  console.log('✔ Webpack config written to the root directory: webpack.config.js');
 
   // Step 4: Remove outdated files
   const filesToDelete = [
-    path.join(themesDir, chosenTheme, 'gulp'),
+    path.join(themesDir, chosenTheme, 'gulpfile.js'),
     path.join(themesDir, chosenTheme, 'package.json'),
     path.join(themesDir, chosenTheme, 'package-lock.json'),
   ];

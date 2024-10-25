@@ -23,15 +23,17 @@ function ensurePackageJson() {
     scripts: {
       build: 'webpack --config webpack.config.js',
       watch: 'webpack --watch --config webpack.config.js',
-      'create-block': 'node createBlock.js'
     },
     author: 'E11 Group',
     license: 'ISC'
   };
 
-  // Merge additional fields into package.json data, preserving existing values
+  // Merge additional fields into package.json data, preserving existing values except for scripts
   Object.entries(additionalFields).forEach(([key, value]) => {
-    if (!packageData[key]) {
+    if (key === 'scripts') {
+      // Overwrite specific scripts
+      packageData.scripts = { ...packageData.scripts, ...value };
+    } else if (!packageData[key]) {
       packageData[key] = value;
     }
   });
@@ -54,10 +56,17 @@ if (!fs.existsSync('node_modules')) {
   console.log('✔ Dependencies installed successfully.');
 }
 
-// Step to download, run, and delete setup-webpack.js
+// Download setup-webpack.js
 console.log('Downloading setup-webpack.js...');
 execSync(
   'curl -s -o setup-webpack.js https://raw.githubusercontent.com/E11-Group/gulp-to-webpack/main/setup-webpack.js',
+  { stdio: 'inherit' }
+);
+
+// Download webpack.config.js
+console.log('Downloading webpack.config.js...');
+execSync(
+  'curl -s -o webpack.config.js https://raw.githubusercontent.com/E11-Group/gulp-to-webpack/main/webpack.config.js',
   { stdio: 'inherit' }
 );
 
