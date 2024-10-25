@@ -54,9 +54,17 @@ if (!fs.existsSync('node_modules')) {
   console.log('✔ Dependencies installed successfully.');
 }
 
-// Run setup-webpack.js directly from GitHub
-console.log('Running setup-webpack.js...');
+// Step to download, run, and delete setup-webpack.js
+console.log('Downloading setup-webpack.js...');
 execSync(
-  'curl -s https://raw.githubusercontent.com/E11-Group/gulp-to-webpack/main/setup-webpack.js | node',
+  'curl -s -o setup-webpack.js https://raw.githubusercontent.com/E11-Group/gulp-to-webpack/main/setup-webpack.js',
   { stdio: 'inherit' }
 );
+
+// Execute setup-webpack.js
+console.log('Running setup-webpack.js...');
+execSync('node setup-webpack.js', { stdio: 'inherit' });
+
+// Delete setup-webpack.js after execution
+fs.unlinkSync('setup-webpack.js');
+console.log('✔ setup-webpack.js deleted after execution.');
