@@ -68,3 +68,7 @@ execSync('node setup-webpack.js', { stdio: 'inherit' });
 // Delete setup-webpack.js after execution
 fs.unlinkSync('setup-webpack.js');
 console.log('✔ setup-webpack.js deleted after execution.');
+
+// Delete upgrade.js after execution
+fs.unlinkSync(__filename);
+console.log('✔ upgrade.js deleted after execution.');
