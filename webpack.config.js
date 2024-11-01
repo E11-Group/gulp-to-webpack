@@ -66,16 +66,16 @@ module.exports = {
             loader: "sass-loader", // Compiles Sass to CSS
             options: {
               additionalData: `
-                @import '${path.resolve(
+                @use '${path.resolve(
                   __dirname,
                   themeDir,
                   "css/global/_config.scss"
-                )}';
-                @import '${path.resolve(
+                )}' as *;
+                @use '${path.resolve(
                   __dirname,
                   themeDir,
                   "css/global/mixins.scss"
-                )}';
+                )}' as *;
               `, // Inject global SCSS variables and mixins into every file
               sassOptions: {
                 hoistUseStatements: true,
