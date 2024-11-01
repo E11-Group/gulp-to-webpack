@@ -26,13 +26,18 @@ function ensurePackageJson() {
     },
     author: "E11 Group",
     license: "ISC",
+    devDependencies: {
+      "ajv": "^8.17.1",
+      "ajv-keywords": "^5.1.0"
+    }
   };
 
   // Merge additional fields into package.json data, preserving existing values except for scripts
   Object.entries(additionalFields).forEach(([key, value]) => {
     if (key === "scripts") {
-      // Overwrite specific scripts
       packageData.scripts = { ...packageData.scripts, ...value };
+    } else if (key === "devDependencies") {
+      packageData.devDependencies = { ...packageData.devDependencies, ...value };
     } else if (!packageData[key]) {
       packageData[key] = value;
     }
@@ -50,7 +55,7 @@ ensurePackageJson();
 if (!fs.existsSync("node_modules")) {
   console.log("Installing necessary packages...");
   execSync(
-    "npm install @inquirer/prompts autoprefixer css-loader glob mini-css-extract-plugin postcss-loader sass sass-loader terser webpack webpack-cli webpack-concat-files-plugin prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-plugin-node eslint-plugin-promise",
+    "npm install @inquirer/prompts autoprefixer css-loader glob mini-css-extract-plugin postcss-loader sass sass-loader terser webpack webpack-cli webpack-concat-files-plugin prettier eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-plugin-node eslint-plugin-promise ajv ajv-keywords",
     { stdio: "inherit" }
   );
   console.log("✔ Dependencies installed successfully.");
